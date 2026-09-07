@@ -663,7 +663,73 @@ document.getElementById("codeInput").addEventListener("keydown",e=>{
   </div>
 
 </div>
+<!-- رقم 2: الأسواق -->
+<div class="markets-section" id="marketsSection">
 
+  <h2>🌐 الأسواق</h2>
+
+  <input
+    type="text"
+    id="marketSearch"
+    placeholder="🔎 ابحث عن السوق..."
+    oninput="searchMarkets()"
+  >
+
+  <div class="market-buttons" id="marketList">
+
+    <button onclick="selectMarket('EUR/USD')">EUR/USD</button>
+    <button onclick="selectMarket('GBP/USD')">GBP/USD</button>
+    <button onclick="selectMarket('USD/JPY')">USD/JPY</button>
+    <button onclick="selectMarket('USD/CHF')">USD/CHF</button>
+    <button onclick="selectMarket('AUD/USD')">AUD/USD</button>
+    <button onclick="selectMarket('USD/CAD')">USD/CAD</button>
+    <button onclick="selectMarket('NZD/USD')">NZD/USD</button>
+
+    <button onclick="selectMarket('EUR/GBP')">EUR/GBP</button>
+    <button onclick="selectMarket('EUR/JPY')">EUR/JPY</button>
+    <button onclick="selectMarket('GBP/JPY')">GBP/JPY</button>
+    <button onclick="selectMarket('AUD/JPY')">AUD/JPY</button>
+    <button onclick="selectMarket('EUR/AUD')">EUR/AUD</button>
+
+    <button onclick="selectMarket('Gold')">🥇 GOLD</button>
+    <button onclick="selectMarket('Silver')">🥈 SILVER</button>
+    <button onclick="selectMarket('Oil')">🛢️ OIL</button>
+
+    <button onclick="selectMarket('Bitcoin')">₿ Bitcoin</button>
+    <button onclick="selectMarket('Ethereum')">Ξ Ethereum</button>
+
+  </div>
+
+  <div id="selectedMarket">
+    السوق المختار: <strong>لم يتم الاختيار</strong>
+  </div>
+
+</div>
+
+<script>
+function selectMarket(market) {
+  document.getElementById("selectedMarket").innerHTML =
+    "السوق المختار: <strong>" + market + "</strong>";
+
+  // حفظ السوق المختار
+  localStorage.setItem("selectedMarket", market);
+}
+
+function searchMarkets() {
+  const search =
+    document.getElementById("marketSearch").value.toLowerCase();
+
+  const buttons =
+    document.querySelectorAll("#marketList button");
+
+  buttons.forEach(button => {
+    const name = button.textContent.toLowerCase();
+
+    button.style.display =
+      name.includes(search) ? "block" : "none";
+  });
+}
+</script>
 <script>
 
 function activate() {
