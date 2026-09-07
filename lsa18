@@ -1,1 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>بوت تداول عصموي</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0b0f14;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 430px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: auto;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #00c853, #00a844);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 38px;
+      box-shadow: 0 0 25px rgba(0, 200, 83, 0.25);
+    }
+
+    .header h1 {
+      margin-top: 15px;
+      font-size: 25px;
+    }
+
+    .header p {
+      margin-top: 8px;
+      color: #9aa4b2;
+      font-size: 14px;
+    }
+
+    .card {
+      background: #151b23;
+      border: 1px solid #26303c;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .title {
+      text-align: center;
+      font-size: 19px;
+      margin-bottom: 20px;
+    }
+
+    .input-box {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid #303b48;
+      background: #0d1218;
+      color: white;
+      font-size: 16px;
+      outline: none;
+      text-align: center;
+    }
+
+    .input-box input:focus {
+      border-color: #00c853;
+    }
+
+    .login {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 12px;
+      background: #00c853;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login:active {
+      transform: scale(0.98);
+    }
+
+    .status {
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 10px;
+      background: #0d1218;
+      color: #9aa4b2;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .dashboard {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .welcome {
+      background: #151b23;
+      border: 1px solid #26303c;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .welcome h2 {
+      color: #00c853;
+      margin-bottom: 8px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .menu button {
+      padding: 17px 10px;
+      border: 1px solid #303b48;
+      border-radius: 13px;
+      background: #11171e;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .menu button:hover {
+      border-color: #00c853;
+    }
+
+    .footer {
+      text-align: center;
+      color: #687384;
+      font-size: 12px;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- الواجهة الرئيسية -->
+    <div class="header">
+      <div class="logo">📈</div>
+
+      <h1>بوت تداول عصموي</h1>
+
+      <p>Smart Trading Assistant</p>
+    </div>
+
+    <!-- تسجيل الدخول -->
+    <div class="card">
+
+      <div class="title">
+        🔐 أدخل الرمز الخاص بالبوت
+      </div>
+
+      <div class="input-box">
+        <input
+          id="token"
+          type="password"
+          placeholder="أدخل الرمز السري"
+          inputmode="numeric"
+        >
+      </div>
+
+      <button class="login" onclick="activate()">
+        🔓 دخول إلى البوت
+      </button>
+
+      <div class="status" id="status">
+        البوت مقفل 🔒
+      </div>
+
+    </div>
+
+    <!-- لوحة البوت بعد الدخول -->
+    <div class="dashboard" id="dashboard">
+
+      <div class="welcome">
+        <h2>مرحبًا بك 👋</h2>
+        <p>تم فتح البوت بنجاح</p>
+      </div>
+
+      <div class="menu">
+
+        <button>
+          🌐<br>
+          الأسواق
+        </button>
+
+        <button>
+          📊<br>
+          الاستراتيجيات
+        </button>
+
+        <button>
+          ⏱️<br>
+          الفريمات
+        </button>
+
+        <button>
+          ⚙️<br>
+          الإعدادات
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      بوت تداول عصموي © 2026
+    </div>
+
+  </div>
+
+  <script>
+
+    // الرمز السري
+    const SECRET_CODE = "2008";
+
+    function activate() {
+
+      const token = document.getElementById("token").value.trim();
+      const status = document.getElementById("status");
+      const dashboard = document.getElementById("dashboard");
+
+      if (token === SECRET_CODE) {
+
+        status.textContent = "تم فتح البوت بنجاح ✅";
+        status.style.color = "#00c853";
+
+        dashboard.style.display = "block";
+
+      } else {
+
+        status.textContent = "الرمز غير صحيح ❌";
+        status.style.color = "#ff5252";
+
+        dashboard.style.display = "none";
+      }
+    }
+
+  </script>
+
+</body>
+</html>
